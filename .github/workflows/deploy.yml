@@ -38,19 +38,19 @@ jobs:
 
       - name: Verify website artifact
         run: |
-          test -s dist/client/index.html
-          grep -q 'DigiNex' dist/client/index.html
-          if grep -q 'name="generator" content="Jekyll' dist/client/index.html; then
+          test -s .output/public/index.html
+          grep -q 'DigiNex' .output/public/index.html
+          if grep -q 'name="generator" content="Jekyll' .output/public/index.html; then
             echo 'Refusing to publish the README page instead of the website.'
             exit 1
           fi
-          touch dist/client/.nojekyll
-          cp public/CNAME dist/client/CNAME
+          touch .output/public/.nojekyll
+          cp public/CNAME .output/public/CNAME
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/client
+          path: .output/public
 
   deploy:
     needs: build

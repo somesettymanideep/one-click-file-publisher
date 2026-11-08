@@ -31,5 +31,5 @@ use the editor.
 
 ## Static deployment
 
-- GitHub Pages publishes only `dist/client` after explicitly prerendering public routes with a Node-compatible build renderer; Lovable retains its managed Worker preset, because GitHub cannot run the server bundle.
+- GitHub Pages publishes only `.output/public` (the prerendered client output outside the Lovable sandbox) using the default Worker preset; never set a `node-server` nitro preset, because its entry has no `fetch` export and breaks prerendering.
 - The Pages workflow verifies a DigiNex homepage exists before uploading and uses Node 24, because a successful deployment must never publish repository documentation instead of the website.
