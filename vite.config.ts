@@ -10,11 +10,15 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // GitHub only publishes the prerendered client files. Use a Node-compatible
+  // renderer there; Lovable keeps its own Worker preset when publishing here.
+  nitro: { preset: "node-server" },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
     // Prerender pages to static HTML so the site can be hosted on GitHub Pages.
-    prerender: { enabled: true, crawlLinks: true },
+    pages: [{ path: "/" }],
+    prerender: { enabled: true, autoStaticPathsDiscovery: false, crawlLinks: false },
   },
 });

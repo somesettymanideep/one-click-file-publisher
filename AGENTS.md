@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Static deployment
+
+- GitHub Pages publishes only `dist/client` after explicitly prerendering public routes with a Node-compatible build renderer; Lovable retains its managed Worker preset, because GitHub cannot run the server bundle.
+- The Pages workflow verifies a DigiNex homepage exists before uploading and uses Node 24, because a successful deployment must never publish repository documentation instead of the website.
